@@ -1,0 +1,3 @@
+# Ask all search engines not to crawl or index this site.
+User-agent: *
+Disallow: /

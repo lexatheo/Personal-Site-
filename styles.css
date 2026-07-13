@@ -1,0 +1,328 @@
+/* ===================================================================
+   Personal website — stylesheet
+
+   You will rarely need to touch this file. All text/links live in
+   index.html (look for the <!-- EDIT --> comments).
+
+   To tweak the look, the few things worth changing are the colour
+   and spacing variables in :root just below.
+   =================================================================== */
+
+:root {
+  /* --- Colours (restrained palette) --- */
+  --ink:        #1a1815;   /* near-black body text            */
+  --ink-soft:   #55504a;   /* secondary / muted text          */
+  --paper:      #faf7f1;   /* off-white background            */
+  --rule:       #e4ded3;   /* hairline dividers               */
+  --accent:     #9c5c44;   /* one subtle warm accent          */
+
+  /* --- Type --- */
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Times New Roman", serif;
+
+  /* --- Layout --- */
+  --measure: 40rem;        /* max text width                  */
+  --gap:     4.5rem;       /* vertical rhythm between sections */
+}
+
+/* --- Reset-ish --- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Constrain everything to a calm, readable column */
+.site-header,
+main,
+.site-footer {
+  max-width: var(--measure);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+/* -------------------------------------------------------------------
+   One-view-at-a-time ("tab") behaviour.
+
+   When JavaScript is on, the <body> gets a "js" class. That lets us
+   hide every section except the active one, so clicking a nav item
+   swaps the page instead of scrolling. If JS is ever off, all sections
+   simply show in a normal scroll — nothing breaks.
+   ------------------------------------------------------------------- */
+.js .view        { display: none; }
+.js .view.active { display: block; animation: fade 0.35s ease; }
+
+@keyframes fade {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .view.active { animation: none; }
+}
+
+
+/* ===================================================================
+   Header
+   =================================================================== */
+.site-header {
+  padding-top: 5rem;
+  padding-bottom: 2.5rem;
+}
+
+.name {
+  display: inline-block;
+  font-weight: 500;
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  margin: 0 0 0.75rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.name:hover { color: var(--accent); }
+
+.tagline {
+  color: var(--ink-soft);
+  font-size: 1.125rem;
+  font-style: italic;
+  margin: 0 0 1.75rem;
+  max-width: 32rem;
+}
+
+/* Section nav + social nav */
+.nav,
+.social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  font-size: 0.9375rem;
+}
+
+.nav {
+  letter-spacing: 0.02em;
+  margin-bottom: 0.75rem;
+}
+
+.social {
+  color: var(--ink-soft);
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 0.25rem;
+}
+
+/* Social links are icons, not words — no underline, just a colour shift */
+.social a {
+  display: inline-flex;
+  border-bottom: none !important;
+  padding-bottom: 0;
+}
+
+.social svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  display: block;
+  transition: fill 0.2s ease, transform 0.2s ease;
+}
+
+.social a:hover svg {
+  fill: var(--accent);
+  transform: translateY(-2px);
+}
+
+.nav a,
+.social a {
+  color: inherit;
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.nav a:hover,
+.social a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* The nav item for the section you're currently viewing */
+.nav a.current {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+
+/* ===================================================================
+   Intro bio
+   =================================================================== */
+.intro {
+  padding-block: 1.5rem 3rem;
+  border-top: 1px solid var(--rule);
+}
+
+.bio,
+.bio-placeholder {
+  font-size: 1.1875rem;
+  line-height: 1.7;
+  margin: 0 0 1.25rem;
+}
+
+/* Portrait at the top of the bio view */
+.portrait {
+  display: block;
+  width: 100%;
+  max-width: 17rem;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 3px;
+  margin: 0 0 2rem;
+}
+
+
+/* ===================================================================
+   Sections
+   =================================================================== */
+.section {
+  padding-block: var(--gap);
+  border-top: 1px solid var(--rule);
+}
+
+.section h2 {
+  font-weight: 500;
+  font-size: 1.625rem;
+  letter-spacing: -0.01em;
+  margin: 0 0 1.75rem;
+}
+
+.subhead {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-family: var(--serif);
+  margin: 2rem 0 0.85rem;
+}
+
+/* first subhead in a section sits tighter to the h2 */
+.section h2 + .subhead { margin-top: 0; }
+
+
+/* ===================================================================
+   Lists of entries
+   =================================================================== */
+.entries {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.entries li {
+  margin-bottom: 1rem;
+}
+
+.entries.tight li {
+  margin-bottom: 0.4rem;
+}
+
+.role {
+  font-weight: 600;
+}
+
+/* secondary detail line under a role */
+.detail {
+  display: block;
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+  font-style: italic;
+  margin-top: 0.15rem;
+}
+
+.venue {
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+/* Coursework groups */
+.group {
+  margin-bottom: 1.5rem;
+}
+
+.group-label {
+  font-weight: 600;
+  margin: 0 0 0.4rem;
+}
+
+.note {
+  color: var(--ink-soft);
+  font-style: italic;
+  margin-top: 1.75rem;
+}
+
+/* Links inside body content */
+main a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+main a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+
+/* ===================================================================
+   Footer
+   =================================================================== */
+.site-footer {
+  border-top: 1px solid var(--rule);
+  padding-block: 2.5rem 4rem;
+  color: var(--ink-soft);
+  font-size: 0.875rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.site-footer p { margin: 0; }
+
+.site-footer a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.site-footer a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+
+/* ===================================================================
+   Small screens
+   =================================================================== */
+@media (max-width: 34rem) {
+  .site-header { padding-top: 3.5rem; }
+  :root { --gap: 3.25rem; }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
