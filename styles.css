@@ -256,15 +256,17 @@ main,
   font-style: italic;
 }
 
-/* Coursework groups */
+/* Laboratory technique and coursework groups */
 .group {
   margin-bottom: 1.5rem;
 }
 
 .group-label {
+  font-size: inherit;
   font-weight: 600;
   margin: 0 0 0.4rem;
 }
+
 
 .note {
   color: var(--ink-soft);
@@ -285,6 +287,109 @@ main a:hover {
   border-bottom-color: var(--accent);
 }
 
+
+/* ===================================================================
+   Research: compact, aligned skill groups
+   =================================================================== */
+.view > h2 {
+  font-weight: 500;
+  font-size: 2rem;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  margin: 0 0 1.5rem;
+}
+
+.research-experience {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.75rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.research-affiliation,
+.research-credit {
+  display: block;
+  color: var(--ink-soft);
+  margin-top: 0.25rem;
+}
+
+.research-credit { font-size: 0.9375rem; }
+
+.research-block {
+  border-top: 1px solid var(--rule);
+  padding-top: 1.5rem;
+  margin-top: 2rem;
+}
+
+.research-heading {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.research-context {
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
+  margin: 0.4rem 0 0;
+}
+
+.skill-rows { margin: 0.5rem 0 0; }
+
+.skill-row {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  column-gap: 1.5rem;
+  padding: 1rem 0;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.skill-row + .skill-row {
+  border-top: 1px solid var(--rule);
+}
+
+.skill-row:last-child { padding-bottom: 0; }
+.skill-row dt { font-weight: 600; }
+.skill-row dd { margin: 0; }
+.skill-row p { margin: 0; }
+.skill-row p + p { margin-top: 0.65rem; }
+
+.coursework-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.75rem;
+  margin-top: 1rem;
+}
+
+.coursework-label {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  margin: 0 0 0.65rem;
+}
+
+.coursework-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+.coursework-list li + li { margin-top: 0.55rem; }
+.coursework-block { padding-bottom: 2.5rem; }
+
+@media (max-width: 34rem) {
+  .nav { gap: 0.5rem 1rem; }
+  .research-experience,
+  .coursework-columns { grid-template-columns: 1fr; gap: 1.25rem; }
+  .skill-row { grid-template-columns: 1fr; gap: 0.4rem; }
+}
 
 /* ===================================================================
    Footer
